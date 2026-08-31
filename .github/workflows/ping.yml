@@ -1,0 +1,13 @@
+name: keep-supabase-alive
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase to prevent pause
+        run: |
+          curl -sf 'https://fndwmkwqtajsmwpqkvmb.supabase.co/auth/v1/health' || true
+          echo 'ping done'
